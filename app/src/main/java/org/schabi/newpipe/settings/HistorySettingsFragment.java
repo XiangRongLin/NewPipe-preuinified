@@ -10,6 +10,7 @@ import androidx.preference.Preference;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.local.history.HistoryRecordManager;
 import org.schabi.newpipe.report.ErrorActivity;
+import org.schabi.newpipe.report.ErrorInfo;
 import org.schabi.newpipe.report.UserAction;
 import org.schabi.newpipe.util.InfoCache;
 
@@ -64,11 +65,11 @@ public class HistorySettingsFragment extends BasePreferenceFragment {
                                         throwable -> ErrorActivity.reportError(getContext(),
                                                 throwable,
                                                 SettingsActivity.class, null,
-                                                ErrorActivity.ErrorInfo.make(
-                                                        UserAction.DELETE_FROM_HISTORY,
-                                                        "none",
-                                                        "Delete playback states",
-                                                        R.string.general_error)));
+                                            ErrorInfo.make(
+                                                UserAction.DELETE_FROM_HISTORY,
+                                                "none",
+                                                "Delete playback states",
+                                                R.string.general_error)));
 
                         final Disposable onDelete = recordManager.deleteWholeStreamHistory()
                                 .observeOn(AndroidSchedulers.mainThread())
@@ -79,11 +80,11 @@ public class HistorySettingsFragment extends BasePreferenceFragment {
                                         throwable -> ErrorActivity.reportError(getContext(),
                                                 throwable,
                                                 SettingsActivity.class, null,
-                                                ErrorActivity.ErrorInfo.make(
-                                                        UserAction.DELETE_FROM_HISTORY,
-                                                        "none",
-                                                        "Delete view history",
-                                                        R.string.general_error)));
+                                            ErrorInfo.make(
+                                                UserAction.DELETE_FROM_HISTORY,
+                                                "none",
+                                                "Delete view history",
+                                                R.string.general_error)));
 
                         final Disposable onClearOrphans = recordManager.removeOrphanedRecords()
                                 .observeOn(AndroidSchedulers.mainThread())
@@ -93,11 +94,11 @@ public class HistorySettingsFragment extends BasePreferenceFragment {
                                         throwable -> ErrorActivity.reportError(getContext(),
                                                 throwable,
                                                 SettingsActivity.class, null,
-                                                ErrorActivity.ErrorInfo.make(
-                                                        UserAction.DELETE_FROM_HISTORY,
-                                                        "none",
-                                                        "Delete search history",
-                                                        R.string.general_error)));
+                                            ErrorInfo.make(
+                                                UserAction.DELETE_FROM_HISTORY,
+                                                "none",
+                                                "Delete search history",
+                                                R.string.general_error)));
                         disposables.add(onDeletePlaybackStates);
                         disposables.add(onClearOrphans);
                         disposables.add(onDelete);
@@ -122,11 +123,11 @@ public class HistorySettingsFragment extends BasePreferenceFragment {
                                         throwable -> ErrorActivity.reportError(getContext(),
                                                 throwable,
                                                 SettingsActivity.class, null,
-                                                ErrorActivity.ErrorInfo.make(
-                                                        UserAction.DELETE_FROM_HISTORY,
-                                                        "none",
-                                                        "Delete playback states",
-                                                        R.string.general_error)));
+                                            ErrorInfo.make(
+                                                UserAction.DELETE_FROM_HISTORY,
+                                                "none",
+                                                "Delete playback states",
+                                                R.string.general_error)));
 
                         disposables.add(onDeletePlaybackStates);
                     }))
@@ -148,11 +149,11 @@ public class HistorySettingsFragment extends BasePreferenceFragment {
                                         throwable -> ErrorActivity.reportError(getContext(),
                                                 throwable,
                                                 SettingsActivity.class, null,
-                                                ErrorActivity.ErrorInfo.make(
-                                                        UserAction.DELETE_FROM_HISTORY,
-                                                        "none",
-                                                        "Delete search history",
-                                                        R.string.general_error)));
+                                            ErrorInfo.make(
+                                                UserAction.DELETE_FROM_HISTORY,
+                                                "none",
+                                                "Delete search history",
+                                                R.string.general_error)));
                         disposables.add(onDelete);
                     }))
                     .create()

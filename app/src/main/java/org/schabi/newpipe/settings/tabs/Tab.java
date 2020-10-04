@@ -26,6 +26,7 @@ import org.schabi.newpipe.local.history.StatisticsPlaylistFragment;
 import org.schabi.newpipe.local.playlist.LocalPlaylistFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionFragment;
 import org.schabi.newpipe.report.ErrorActivity;
+import org.schabi.newpipe.report.ErrorInfo;
 import org.schabi.newpipe.report.UserAction;
 import org.schabi.newpipe.util.KioskTranslator;
 import org.schabi.newpipe.util.ServiceHelper;
@@ -156,7 +157,7 @@ public abstract class Tab {
         CHANNEL(new ChannelTab()),
         PLAYLIST(new PlaylistTab());
 
-        private Tab tab;
+        private final Tab tab;
 
         Type(final Tab tab) {
             this.tab = tab;
@@ -483,8 +484,8 @@ public abstract class Tab {
                 kioskId = service.getKioskList().getDefaultKioskId();
             } catch (ExtractionException e) {
                 ErrorActivity.reportError(context, e, null, null,
-                        ErrorActivity.ErrorInfo.make(UserAction.REQUESTED_KIOSK, "none",
-                                "Loading default kiosk from selected service", 0));
+                    ErrorInfo.make(UserAction.REQUESTED_KIOSK, "none",
+                        "Loading default kiosk from selected service", 0));
             }
             return kioskId;
         }

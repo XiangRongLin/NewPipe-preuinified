@@ -73,6 +73,7 @@ import org.schabi.newpipe.player.PopupVideoPlayer;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue;
 import org.schabi.newpipe.report.ErrorActivity;
+import org.schabi.newpipe.report.ErrorInfo;
 import org.schabi.newpipe.report.UserAction;
 import org.schabi.newpipe.util.AndroidTvUtils;
 import org.schabi.newpipe.util.Constants;
@@ -1339,13 +1340,13 @@ public class VideoDetailFragment extends BaseStateFragment<StreamInfo>
 
             downloadDialog.show(getActivity().getSupportFragmentManager(), "downloadDialog");
         } catch (Exception e) {
-            ErrorActivity.ErrorInfo info = ErrorActivity.ErrorInfo.make(UserAction.UI_ERROR,
-                    ServiceList.all()
-                            .get(currentInfo
-                                    .getServiceId())
-                            .getServiceInfo()
-                            .getName(), "",
-                    R.string.could_not_setup_download_menu);
+            ErrorInfo info = ErrorInfo.make(UserAction.UI_ERROR,
+                ServiceList.all()
+                    .get(currentInfo
+                        .getServiceId())
+                    .getServiceInfo()
+                    .getName(), "",
+                R.string.could_not_setup_download_menu);
 
             ErrorActivity.reportError(getActivity(),
                     e,

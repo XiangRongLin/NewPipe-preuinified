@@ -32,6 +32,7 @@ import org.schabi.newpipe.local.BaseLocalListFragment;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue;
 import org.schabi.newpipe.report.ErrorActivity;
+import org.schabi.newpipe.report.ErrorInfo;
 import org.schabi.newpipe.report.UserAction;
 import org.schabi.newpipe.settings.SettingsActivity;
 import org.schabi.newpipe.util.NavigationHelper;
@@ -179,11 +180,11 @@ public class StatisticsPlaylistFragment
                                             throwable -> ErrorActivity.reportError(getContext(),
                                                     throwable,
                                                     SettingsActivity.class, null,
-                                                    ErrorActivity.ErrorInfo.make(
-                                                            UserAction.DELETE_FROM_HISTORY,
-                                                            "none",
-                                                            "Delete view history",
-                                                            R.string.general_error)));
+                                                ErrorInfo.make(
+                                                    UserAction.DELETE_FROM_HISTORY,
+                                                    "none",
+                                                    "Delete view history",
+                                                    R.string.general_error)));
 
                             final Disposable onClearOrphans = recordManager.removeOrphanedRecords()
                                     .observeOn(AndroidSchedulers.mainThread())
@@ -193,11 +194,11 @@ public class StatisticsPlaylistFragment
                                             throwable -> ErrorActivity.reportError(getContext(),
                                                     throwable,
                                                     SettingsActivity.class, null,
-                                                    ErrorActivity.ErrorInfo.make(
-                                                            UserAction.DELETE_FROM_HISTORY,
-                                                            "none",
-                                                            "Delete search history",
-                                                            R.string.general_error)));
+                                                ErrorInfo.make(
+                                                    UserAction.DELETE_FROM_HISTORY,
+                                                    "none",
+                                                    "Delete search history",
+                                                    R.string.general_error)));
                             disposables.add(onClearOrphans);
                             disposables.add(onDelete);
                         }))

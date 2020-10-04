@@ -42,6 +42,7 @@ import org.schabi.newpipe.BuildConfig;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.report.ErrorActivity;
+import org.schabi.newpipe.report.ErrorInfo;
 import org.schabi.newpipe.report.UserAction;
 import org.schabi.newpipe.util.NavigationHelper;
 
@@ -95,21 +96,21 @@ public class MissionAdapter extends Adapter<ViewHolder> implements Handler.Callb
         ALGORITHMS.put(R.id.sha1, "SHA1");
     }
 
-    private Context mContext;
-    private LayoutInflater mInflater;
-    private DownloadManager mDownloadManager;
-    private Deleter mDeleter;
+    private final Context mContext;
+    private final LayoutInflater mInflater;
+    private final DownloadManager mDownloadManager;
+    private final Deleter mDeleter;
     private int mLayout;
-    private DownloadManager.MissionIterator mIterator;
-    private ArrayList<ViewHolderItem> mPendingDownloadsItems = new ArrayList<>();
-    private Handler mHandler;
+    private final DownloadManager.MissionIterator mIterator;
+    private final ArrayList<ViewHolderItem> mPendingDownloadsItems = new ArrayList<>();
+    private final Handler mHandler;
     private MenuItem mClear;
     private MenuItem mStartButton;
     private MenuItem mPauseButton;
-    private View mEmptyMessage;
+    private final View mEmptyMessage;
     private RecoverHelper mRecover;
-    private View mView;
-    private ArrayList<Mission> mHidden;
+    private final View mView;
+    private final ArrayList<Mission> mHidden;
     private Snackbar mSnackbar;
 
     private final Runnable rUpdater = this::updater;
@@ -574,7 +575,7 @@ public class MissionAdapter extends Adapter<ViewHolder> implements Handler.Callb
                 mission.errObject,
                 null,
                 null,
-                ErrorActivity.ErrorInfo.make(action, service, request.toString(), reason)
+            ErrorInfo.make(action, service, request.toString(), reason)
         );
     }
 

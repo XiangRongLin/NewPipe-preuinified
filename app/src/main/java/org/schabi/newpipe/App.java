@@ -25,6 +25,7 @@ import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.downloader.Downloader;
 import org.schabi.newpipe.report.AcraReportSenderFactory;
 import org.schabi.newpipe.report.ErrorActivity;
+import org.schabi.newpipe.report.ErrorInfo;
 import org.schabi.newpipe.report.UserAction;
 import org.schabi.newpipe.settings.SettingsActivity;
 import org.schabi.newpipe.util.ExceptionUtils;
@@ -213,8 +214,8 @@ public class App extends MultiDexApplication {
                     ace,
                     null,
                     null,
-                    ErrorActivity.ErrorInfo.make(UserAction.SOMETHING_ELSE, "none",
-                            "Could not initialize ACRA crash report", R.string.app_ui_crash));
+                ErrorInfo.make(UserAction.SOMETHING_ELSE, "none",
+                    "Could not initialize ACRA crash report", R.string.app_ui_crash));
         }
     }
 
