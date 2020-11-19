@@ -1364,7 +1364,7 @@ public class VideoDetailFragment extends BaseStateFragment<StreamInfo>
             return true;
         }
 
-        int errorId = exception instanceof YoutubeStreamExtractor.DecryptException
+        int errorId = exception instanceof YoutubeStreamExtractor.DeobfuscateException
                 ? R.string.youtube_signature_decryption_error
                 : exception instanceof ExtractionException
                         ? R.string.parsing_error
