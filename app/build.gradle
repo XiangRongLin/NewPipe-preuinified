@@ -75,6 +75,10 @@ android {
         encoding 'utf-8'
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
     // Required and used only by groupie
     androidExtensions {
         experimental = true
@@ -144,7 +148,7 @@ afterEvaluate {
 }
 
 dependencies {
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
