@@ -29,6 +29,8 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -40,6 +42,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import androidx.core.app.NotificationCompat.DecoratedCustomViewStyle;
+import androidx.media.app.NotificationCompat.MediaStyle;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.source.MediaSource;
@@ -224,6 +228,11 @@ public final class BackgroundPlayer extends Service {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
             builder.setPriority(NotificationCompat.PRIORITY_MAX);
         }
+
+        if (VERSION.SDK_INT > VERSION_CODES.Q) {
+            builder.setStyle(new MediaStyle());
+        }
+
         return builder;
     }
 
