@@ -13,8 +13,8 @@ android {
         resValue "string", "app_name", "NewPipe"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 953
-        versionName "0.19.8"
+        versionCode 954
+        versionName "0.20.9"
 
         multiDexEnabled true
 
@@ -144,7 +144,7 @@ task formatKtlint(type: JavaExec) {
 }
 
 afterEvaluate {
-    preDebugBuild.dependsOn runCheckstyle, runKtlint
+    preDebugBuild.dependsOn runKtlint
 }
 
 dependencies {
@@ -175,7 +175,7 @@ dependencies {
         exclude module: 'support-annotations'
     }
 
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.20.8'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.20.9'
 
     implementation "com.github.TeamNewPipe:nanojson:1d9e1aea9049fc9f85e68b43ba39fe7be1c1f751"
     implementation "org.jsoup:jsoup:1.13.1"
