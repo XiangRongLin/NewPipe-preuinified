@@ -16,8 +16,8 @@ import org.schabi.newpipelegacy.util.ThemeHelper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
-import java.nio.charset.StandardCharsets;
 
 import static org.schabi.newpipelegacy.util.Localization.assureCorrectAppLanguage;
 
@@ -41,7 +41,7 @@ public class LicenseFragmentHelper extends AsyncTask<Object, Void, Integer> {
         final String webViewData;
         try {
             final BufferedReader in = new BufferedReader(new InputStreamReader(
-                    context.getAssets().open(license.getFilename()), StandardCharsets.UTF_8));
+                context.getAssets().open(license.getFilename()), "utf-8"));
             String str;
             while ((str = in.readLine()) != null) {
                 licenseContent.append(str);
@@ -50,10 +50,10 @@ public class LicenseFragmentHelper extends AsyncTask<Object, Void, Integer> {
 
             // split the HTML file and insert the stylesheet into the HEAD of the file
             webViewData = licenseContent.toString().replace("</head>",
-                    "<style>" + getLicenseStylesheet(context) + "</style></head>");
+                "<style>" + getLicenseStylesheet(context) + "</style></head>");
         } catch (IOException e) {
             throw new IllegalArgumentException(
-                    "Could not get license file: " + license.getFilename(), e);
+                "Could not get license file: " + license.getFilename(), e);
         }
         return webViewData;
     }
@@ -65,16 +65,16 @@ public class LicenseFragmentHelper extends AsyncTask<Object, Void, Integer> {
     private static String getLicenseStylesheet(final Context context) {
         final boolean isLightTheme = ThemeHelper.isLightThemeSelected(context);
         return "body{padding:12px 15px;margin:0;"
-                + "background:#" + getHexRGBColor(context, isLightTheme
-                ? R.color.light_license_background_color
-                : R.color.dark_license_background_color) + ";"
-                + "color:#" + getHexRGBColor(context, isLightTheme
-                ? R.color.light_license_text_color
-                : R.color.dark_license_text_color) + "}"
-                + "a[href]{color:#" + getHexRGBColor(context, isLightTheme
-                ? R.color.light_youtube_primary_color
-                : R.color.dark_youtube_primary_color) + "}"
-                + "pre{white-space:pre-wrap}";
+            + "background:#" + getHexRGBColor(context, isLightTheme
+            ? R.color.light_license_background_color
+            : R.color.dark_license_background_color) + ";"
+            + "color:#" + getHexRGBColor(context, isLightTheme
+            ? R.color.light_license_text_color
+            : R.color.dark_license_text_color) + "}"
+            + "a[href]{color:#" + getHexRGBColor(context, isLightTheme
+            ? R.color.light_youtube_primary_color
+            : R.color.dark_youtube_primary_color) + "}"
+            + "pre{white-space:pre-wrap}";
     }
 
     /**
@@ -112,17 +112,23 @@ public class LicenseFragmentHelper extends AsyncTask<Object, Void, Integer> {
             return;
         }
 
-        final String webViewData = Base64.encodeToString(getFormattedLicense(activity, license)
-                .getBytes(StandardCharsets.UTF_8), Base64.NO_PADDING);
-        final WebView webView = new WebView(activity);
-        webView.loadData(webViewData, "text/html; charset=UTF-8", "base64");
+        final String webViewData;
+        try {
+            webViewData = Base64.encodeToString(getFormattedLicense(activity, license)
+                .getBytes("utf-8"), Base64.NO_PADDING);
+            final WebView webView = new WebView(activity);
+            webView.loadData(webViewData, "text/html; charset=UTF-8", "base64");
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-        alert.setTitle(license.getName());
-        alert.setView(webView);
-        assureCorrectAppLanguage(activity);
-        alert.setNegativeButton(activity.getString(R.string.finish),
+            final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+            alert.setTitle(license.getName());
+            alert.setView(webView);
+            assureCorrectAppLanguage(activity);
+            alert.setNegativeButton(activity.getString(R.string.finish),
                 (dialog, which) -> dialog.dismiss());
-        alert.show();
+            alert.show();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
     }
 }

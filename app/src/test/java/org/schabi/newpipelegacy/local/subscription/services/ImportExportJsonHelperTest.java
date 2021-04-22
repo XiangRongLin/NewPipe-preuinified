@@ -24,7 +24,7 @@ public class ImportExportJsonHelperTest {
                 "{\"app_version\":\"0.11.6\",\"app_version_int\": 47,\"subscriptions\":[]}";
 
         List<SubscriptionItem> items = ImportExportJsonHelper.readFrom(new ByteArrayInputStream(
-                emptySource.getBytes(StandardCharsets.UTF_8)), null);
+                emptySource.getBytes("utf-8")), null);
         assertTrue(items.isEmpty());
     }
 
@@ -39,7 +39,7 @@ public class ImportExportJsonHelperTest {
         for (String invalidContent : invalidList) {
             try {
                 if (invalidContent != null) {
-                    byte[] bytes = invalidContent.getBytes(StandardCharsets.UTF_8);
+                    byte[] bytes = invalidContent.getBytes("utf-8");
                     ImportExportJsonHelper.readFrom((new ByteArrayInputStream(bytes)), null);
                 } else {
                     ImportExportJsonHelper.readFrom(null, null);
@@ -112,7 +112,7 @@ public class ImportExportJsonHelperTest {
 
     private List<SubscriptionItem> readFromWriteTo(final String jsonOut) throws Exception {
         final ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                jsonOut.getBytes(StandardCharsets.UTF_8));
+                jsonOut.getBytes("utf-8"));
         final List<SubscriptionItem> secondReadItems = ImportExportJsonHelper.readFrom(
                 inputStream, null);
 

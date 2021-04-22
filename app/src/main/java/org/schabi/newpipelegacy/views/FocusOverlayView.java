@@ -171,6 +171,8 @@ public final class FocusOverlayView extends Drawable implements
     }
 
     public static void setupFocusObserver(final Dialog dialog) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2)
+            return;
         Rect displayRect = new Rect();
 
         Window window = dialog.getWindow();
@@ -186,6 +188,8 @@ public final class FocusOverlayView extends Drawable implements
     }
 
     public static void setupFocusObserver(final Activity activity) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2)
+            return;
         Rect displayRect = new Rect();
 
         Window window = activity.getWindow();
