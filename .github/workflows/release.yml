@@ -31,9 +31,12 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
+      - name: "Rename archive"
+        run: mv ${{ steps.sign_app.outputs.signedReleaseFile }} app-release.apk
+
       - name: "Create GitHub release"
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ steps.sign_app.outputs.signedReleaseFile }}
+          files: app-release.apk
           fail_on_unmatched_files: true
           draft: true
