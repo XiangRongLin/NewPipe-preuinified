@@ -5,7 +5,6 @@ on:
     tags:
       - "v*"
 
-
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -39,4 +38,3 @@ jobs:
         with:
           files: app-release.apk
           fail_on_unmatched_files: true
-          draft: true
