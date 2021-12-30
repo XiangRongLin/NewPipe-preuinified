@@ -13,8 +13,8 @@ android {
         resValue "string", "app_name", "NewPipe Legacy"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 98
-        versionName "0.21.8"
+        versionCode 99
+        versionName "0.21.12"
 
         multiDexEnabled true
 
@@ -175,7 +175,7 @@ dependencies {
         exclude module: 'support-annotations'
     }
 
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.21.8'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.21.12'
 
     implementation "com.github.TeamNewPipe:nanojson:1d9e1aea9049fc9f85e68b43ba39fe7be1c1f751"
     implementation "org.jsoup:jsoup:1.13.1"
