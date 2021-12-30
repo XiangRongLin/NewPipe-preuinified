@@ -1,10 +1,9 @@
-name: release
+name: release legacy
 
 on:
   push:
     tags:
-      - "v*"
-      - "!v*-legacy"
+      - "v*-legacy"
 
 jobs:
   release:
