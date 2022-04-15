@@ -25,7 +25,7 @@ public class MissionRecoveryInfo implements Serializable, Parcelable {
 
     public MissionRecoveryInfo(@NonNull Stream stream) {
         if (stream instanceof AudioStream) {
-            desiredBitrate = ((AudioStream) stream).average_bitrate;
+            desiredBitrate = ((AudioStream) stream).getAverageBitrate();
             desired2 = false;
             kind = 'a';
         } else if (stream instanceof VideoStream) {
