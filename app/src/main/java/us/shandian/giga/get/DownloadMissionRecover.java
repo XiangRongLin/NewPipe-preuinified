@@ -123,7 +123,7 @@ public class DownloadMissionRecover extends Thread {
     private void resolveStream() throws IOException, ExtractionException, HttpError {
         // FIXME: this getErrorMessage() always returns "video is unavailable"
         /*if (mExtractor.getErrorMessage() != null) {
-            mMission.notifyError(mErrCode, new ExtractionException(mExtractor.getErrorMessage()));
+             mMission.notifyError(mErrCode, new ExtractionException(mExtractor.getErrorMessage()));
             return;
         }*/
 
@@ -132,7 +132,7 @@ public class DownloadMissionRecover extends Thread {
         switch (mRecovery.kind) {
             case 'a':
                 for (AudioStream audio : mExtractor.getAudioStreams()) {
-                    if (audio.average_bitrate == mRecovery.desiredBitrate && audio.getFormat() == mRecovery.format) {
+                    if (audio.getAverageBitrate() == mRecovery.desiredBitrate && audio.getFormat() == mRecovery.format) {
                         url = audio.getUrl();
                         break;
                     }
