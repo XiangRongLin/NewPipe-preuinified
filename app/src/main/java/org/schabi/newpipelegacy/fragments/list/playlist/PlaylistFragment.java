@@ -37,6 +37,7 @@ import org.schabi.newpipelegacy.player.playqueue.PlayQueue;
 import org.schabi.newpipelegacy.player.playqueue.PlaylistPlayQueue;
 import org.schabi.newpipelegacy.report.ErrorActivity;
 import org.schabi.newpipelegacy.report.UserAction;
+import org.schabi.newpipelegacy.util.CompatibilityUtil;
 import org.schabi.newpipelegacy.util.ExtractorHelper;
 import org.schabi.newpipelegacy.util.ImageDisplayConstants;
 import org.schabi.newpipelegacy.util.Localization;
@@ -308,7 +309,7 @@ public class PlaylistFragment extends BaseListInfoFragment<PlaylistInfo> {
 
         if (!result.getErrors().isEmpty()) {
             showSnackBarError(result.getErrors(), UserAction.REQUESTED_PLAYLIST,
-                    NewPipe.getNameOfService(result.getServiceId()), result.getUrl(), 0);
+                    CompatibilityUtil.getNameOfService(result.getServiceId()), result.getUrl(), 0);
         }
 
         remotePlaylistManager.getPlaylist(result)
@@ -361,7 +362,7 @@ public class PlaylistFragment extends BaseListInfoFragment<PlaylistInfo> {
 
         if (!result.getErrors().isEmpty()) {
             showSnackBarError(result.getErrors(), UserAction.REQUESTED_PLAYLIST,
-                    NewPipe.getNameOfService(serviceId), "Get next page of: " + url, 0);
+                    CompatibilityUtil.getNameOfService(serviceId), "Get next page of: " + url, 0);
         }
     }
 
@@ -378,7 +379,7 @@ public class PlaylistFragment extends BaseListInfoFragment<PlaylistInfo> {
         int errorId = exception instanceof ExtractionException
                 ? R.string.parsing_error : R.string.general_error;
         onUnrecoverableError(exception, UserAction.REQUESTED_PLAYLIST,
-                NewPipe.getNameOfService(serviceId), url, errorId);
+                CompatibilityUtil.getNameOfService(serviceId), url, errorId);
         return true;
     }
 

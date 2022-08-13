@@ -299,7 +299,7 @@ public final class ExtractorHelper {
                         ? R.string.parsing_error : R.string.general_error;
                 ErrorActivity.reportError(handler, context, exception, MainActivity.class, null,
                         ErrorActivity.ErrorInfo.make(userAction, serviceId == -1 ? "none"
-                                : NewPipe.getNameOfService(serviceId),
+                                : CompatibilityUtil.getNameOfService(serviceId),
                                 url + (optionalErrorMessage == null ? ""
                                         : optionalErrorMessage), errorId));
             }

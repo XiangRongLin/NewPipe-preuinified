@@ -136,7 +136,11 @@ public final class ServiceHelper {
     }
 
     public static void setSelectedServiceId(final Context context, final String serviceName) {
-        int serviceId = NewPipe.getIdOfService(serviceName);
+        int serviceId = -1;
+        try {
+            serviceId = NewPipe.getService(serviceName).getServiceId();
+        } catch (ExtractionException e) {
+        }
         if (serviceId == -1) {
             setSelectedServicePreferences(context,
                     DEFAULT_FALLBACK_SERVICE.getServiceInfo().getName());

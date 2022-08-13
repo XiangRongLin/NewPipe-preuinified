@@ -16,6 +16,7 @@ import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipelegacy.local.LocalItemBuilder;
 import org.schabi.newpipelegacy.local.history.HistoryRecordManager;
 import org.schabi.newpipelegacy.util.AnimationUtils;
+import org.schabi.newpipelegacy.util.CompatibilityUtil;
 import org.schabi.newpipelegacy.util.ImageDisplayConstants;
 import org.schabi.newpipelegacy.util.Localization;
 import org.schabi.newpipelegacy.views.AnimatedProgressBar;
@@ -61,7 +62,7 @@ public class LocalPlaylistStreamItemHolder extends LocalItemHolder {
         itemVideoTitleView.setText(item.getStreamEntity().getTitle());
         itemAdditionalDetailsView.setText(Localization
                 .concatenateStrings(item.getStreamEntity().getUploader(),
-                        NewPipe.getNameOfService(item.getStreamEntity().getServiceId())));
+                        CompatibilityUtil.getNameOfService(item.getStreamEntity().getServiceId())));
 
         if (item.getStreamEntity().getDuration() > 0) {
             itemDurationView.setText(Localization

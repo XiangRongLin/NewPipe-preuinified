@@ -16,6 +16,7 @@ import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipelegacy.local.LocalItemBuilder;
 import org.schabi.newpipelegacy.local.history.HistoryRecordManager;
 import org.schabi.newpipelegacy.util.AnimationUtils;
+import org.schabi.newpipelegacy.util.CompatibilityUtil;
 import org.schabi.newpipelegacy.util.ImageDisplayConstants;
 import org.schabi.newpipelegacy.util.Localization;
 import org.schabi.newpipelegacy.views.AnimatedProgressBar;
@@ -75,7 +76,7 @@ public class LocalStatisticStreamItemHolder extends LocalItemHolder {
         final String watchCount = Localization
                 .shortViewCount(itemBuilder.getContext(), entry.getWatchCount());
         final String uploadDate = dateFormat.format(entry.getLatestAccessDate());
-        final String serviceName = NewPipe.getNameOfService(entry.getStreamEntity().getServiceId());
+        final String serviceName = CompatibilityUtil.getNameOfService(entry.getStreamEntity().getServiceId());
         return Localization.concatenateStrings(watchCount, uploadDate, serviceName);
     }
 
