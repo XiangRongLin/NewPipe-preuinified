@@ -135,16 +135,6 @@ public final class ServiceHelper {
         setSelectedServicePreferences(context, serviceName);
     }
 
-    public static void setSelectedServiceId(final Context context, final String serviceName) {
-        int serviceId = NewPipe.getIdOfService(serviceName);
-        if (serviceId == -1) {
-            setSelectedServicePreferences(context,
-                    DEFAULT_FALLBACK_SERVICE.getServiceInfo().getName());
-        } else {
-            setSelectedServicePreferences(context, serviceName);
-        }
-    }
-
     private static void setSelectedServicePreferences(final Context context,
                                                       final String serviceName) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().

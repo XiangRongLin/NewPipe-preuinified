@@ -42,6 +42,7 @@ import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.report.ErrorActivity;
 import org.schabi.newpipe.report.UserAction;
 import org.schabi.newpipe.util.AnimationUtils;
+import org.schabi.newpipe.util.CompatibilityUtil;
 import org.schabi.newpipe.util.ExtractorHelper;
 import org.schabi.newpipe.util.ImageDisplayConstants;
 import org.schabi.newpipe.util.Localization;
@@ -244,7 +245,7 @@ public class ChannelFragment extends BaseListInfoFragment<ChannelInfo>
         final Consumer<Throwable> onError = (Throwable throwable) -> {
             animateView(headerSubscribeButton, false, 100);
             showSnackBarError(throwable, UserAction.SUBSCRIPTION,
-                    NewPipe.getNameOfService(currentInfo.getServiceId()),
+                    CompatibilityUtil.getNameOfService(currentInfo.getServiceId()),
                     "Get subscription status", 0);
         };
 
@@ -297,7 +298,7 @@ public class ChannelFragment extends BaseListInfoFragment<ChannelInfo>
         final Consumer<Throwable> onError = (@NonNull Throwable throwable) ->
                 onUnrecoverableError(throwable,
                         UserAction.SUBSCRIPTION,
-                        NewPipe.getNameOfService(info.getServiceId()),
+                        CompatibilityUtil.getNameOfService(info.getServiceId()),
                         "Updating Subscription for " + info.getUrl(),
                         R.string.subscription_update_failed);
 
@@ -318,7 +319,7 @@ public class ChannelFragment extends BaseListInfoFragment<ChannelInfo>
         final Consumer<Throwable> onError = (@NonNull Throwable throwable) ->
                 onUnrecoverableError(throwable,
                         UserAction.SUBSCRIPTION,
-                        NewPipe.getNameOfService(currentInfo.getServiceId()),
+                        CompatibilityUtil.getNameOfService(currentInfo.getServiceId()),
                         "Subscription Change",
                         R.string.subscription_change_failed);
 
@@ -505,7 +506,7 @@ public class ChannelFragment extends BaseListInfoFragment<ChannelInfo>
 
             if (!errors.isEmpty()) {
                 showSnackBarError(errors, UserAction.REQUESTED_CHANNEL,
-                        NewPipe.getNameOfService(result.getServiceId()), result.getUrl(), 0);
+                        CompatibilityUtil.getNameOfService(result.getServiceId()), result.getUrl(), 0);
             }
         }
 
@@ -565,7 +566,7 @@ public class ChannelFragment extends BaseListInfoFragment<ChannelInfo>
         if (!result.getErrors().isEmpty()) {
             showSnackBarError(result.getErrors(),
                     UserAction.REQUESTED_CHANNEL,
-                    NewPipe.getNameOfService(serviceId),
+                    CompatibilityUtil.getNameOfService(serviceId),
                     "Get next page of: " + url,
                     R.string.general_error);
         }
@@ -585,7 +586,7 @@ public class ChannelFragment extends BaseListInfoFragment<ChannelInfo>
                 ? R.string.parsing_error : R.string.general_error;
 
         onUnrecoverableError(exception, UserAction.REQUESTED_CHANNEL,
-                NewPipe.getNameOfService(serviceId), url, errorId);
+                CompatibilityUtil.getNameOfService(serviceId), url, errorId);
 
         return true;
     }

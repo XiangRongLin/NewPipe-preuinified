@@ -37,6 +37,7 @@ import org.schabi.newpipe.settings.SelectChannelFragment;
 import org.schabi.newpipe.settings.SelectKioskFragment;
 import org.schabi.newpipe.settings.SelectPlaylistFragment;
 import org.schabi.newpipe.settings.tabs.AddTabDialog.ChooseTabListItem;
+import org.schabi.newpipe.util.CompatibilityUtil;
 import org.schabi.newpipe.util.ThemeHelper;
 
 import java.util.ArrayList;
@@ -410,18 +411,18 @@ public class ChooseTabsFragment extends Fragment {
                         tabName = getString(R.string.default_kiosk_page_summary);
                         break;
                     case KIOSK:
-                        tabName = NewPipe.getNameOfService(((Tab.KioskTab) tab)
+                        tabName = CompatibilityUtil.getNameOfService(((Tab.KioskTab) tab)
                                 .getKioskServiceId()) + "/" + tab.getTabName(requireContext());
                         break;
                     case CHANNEL:
-                        tabName = NewPipe.getNameOfService(((Tab.ChannelTab) tab)
+                        tabName = CompatibilityUtil.getNameOfService(((Tab.ChannelTab) tab)
                                 .getChannelServiceId()) + "/" + tab.getTabName(requireContext());
                         break;
                     case PLAYLIST:
                         final int serviceId = ((Tab.PlaylistTab) tab).getPlaylistServiceId();
                         final String serviceName = serviceId == -1
                                 ? getString(R.string.local)
-                                : NewPipe.getNameOfService(serviceId);
+                                : CompatibilityUtil.getNameOfService(serviceId);
                         tabName = serviceName + "/" + tab.getTabName(requireContext());
                         break;
                     default:

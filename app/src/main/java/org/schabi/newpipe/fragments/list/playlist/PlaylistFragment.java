@@ -37,6 +37,7 @@ import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.PlaylistPlayQueue;
 import org.schabi.newpipe.report.ErrorActivity;
 import org.schabi.newpipe.report.UserAction;
+import org.schabi.newpipe.util.CompatibilityUtil;
 import org.schabi.newpipe.util.ExtractorHelper;
 import org.schabi.newpipe.util.ImageDisplayConstants;
 import org.schabi.newpipe.util.Localization;
@@ -308,7 +309,7 @@ public class PlaylistFragment extends BaseListInfoFragment<PlaylistInfo> {
 
         if (!result.getErrors().isEmpty()) {
             showSnackBarError(result.getErrors(), UserAction.REQUESTED_PLAYLIST,
-                    NewPipe.getNameOfService(result.getServiceId()), result.getUrl(), 0);
+                    CompatibilityUtil.getNameOfService(result.getServiceId()), result.getUrl(), 0);
         }
 
         remotePlaylistManager.getPlaylist(result)
@@ -361,7 +362,7 @@ public class PlaylistFragment extends BaseListInfoFragment<PlaylistInfo> {
 
         if (!result.getErrors().isEmpty()) {
             showSnackBarError(result.getErrors(), UserAction.REQUESTED_PLAYLIST,
-                    NewPipe.getNameOfService(serviceId), "Get next page of: " + url, 0);
+                    CompatibilityUtil.getNameOfService(serviceId), "Get next page of: " + url, 0);
         }
     }
 
@@ -378,7 +379,7 @@ public class PlaylistFragment extends BaseListInfoFragment<PlaylistInfo> {
         int errorId = exception instanceof ExtractionException
                 ? R.string.parsing_error : R.string.general_error;
         onUnrecoverableError(exception, UserAction.REQUESTED_PLAYLIST,
-                NewPipe.getNameOfService(serviceId), url, errorId);
+                CompatibilityUtil.getNameOfService(serviceId), url, errorId);
         return true;
     }
 
@@ -431,7 +432,8 @@ public class PlaylistFragment extends BaseListInfoFragment<PlaylistInfo> {
             }
 
             @Override
-            public void onComplete() { }
+            public void onComplete() {
+            }
         };
     }
 
