@@ -1,0 +1,39 @@
+name: update build.gradle with new version number
+
+on:
+  push:
+    paths:
+      - 'release-versions/*'
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read new version
+        id: new
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./release-versions/new-version.txt
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CUSTOM_TAG: ${{ steps.new.outputs.content }}
+      - name: fix version
+        id: updated
+        run: sed -i 's/v//' ./release-versions/new-version.txt
+      - name: replace version
+        run: sed -i '17s/.*/        versionName "${{ steps.updated.outputs.content }}"/' ./app/build.gradle"
+      - name: replace version elsewhere
+        run: sed -i '178s/.*/    implementation 'com.github.TeamNewPipe:NewPipeExtractor:${{ steps.new.outputs.content }}'"/' ./app/build.gradle"
+      - name: replace code
+        run: old=$((sed '16q;d' ./app/build.gradle)) && \
+             new=$(($old+1)) && \
+             sed -i '16s/.*/        versionCode $((new))"/' ./app/build.gradle"
+      - name: Commit files
+        uses: swinton/commit@v2.x
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            app/build.gradle
+          commit-message: New Release 2/2

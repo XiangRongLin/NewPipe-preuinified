@@ -1,0 +1,27 @@
+name: Get latest release version
+on:
+  schedule:
+    - cron:  '0 10 * * *'
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      - name: Fetch release version
+        run: |
+          curl -sL https://api.github.com/repos/TeamNewPipe/NewPipeExtractor/releases/latest | \
+          jq -r ".tag_name" > release-versions/new-version.txt
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+      - name: Commit file
+        if: steps.git-check.outputs.modified == 'true'
+        uses: swinton/commit@v2.x
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            release-versions/new-version.txt
+          commit-message: New Release 1/2
