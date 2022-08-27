@@ -14,7 +14,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 104
-        versionName "0.22.1"
+        versionName "0.22.2"
 
         multiDexEnabled true
 
