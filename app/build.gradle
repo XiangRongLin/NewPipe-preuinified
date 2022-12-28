@@ -91,14 +91,14 @@ android {
 
 ext {
     icepickVersion = '3.2.0'
-    checkstyleVersion = '8.32'
+    checkstyleVersion = '8.38'
     stethoVersion = '1.5.1'
-    leakCanaryVersion = '2.2'
-    exoPlayerVersion = '2.11.6'
+    leakCanaryVersion = '2.5'
+    exoPlayerVersion = '2.11.8'
     androidxLifecycleVersion = '2.2.0'
     androidxRoomVersion = '2.2.5'
-    groupieVersion = '2.8.0'
-    markwonVersion = '4.3.1'
+    groupieVersion = '2.8.1'
+    markwonVersion = '4.6.0'
 }
 
 configurations {
@@ -148,7 +148,7 @@ afterEvaluate {
 }
 
 dependencies {
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
@@ -156,7 +156,7 @@ dependencies {
     kapt "frankiesardo:icepick-processor:${icepickVersion}"
 
     checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
-    ktlint "com.pinterest:ktlint:0.35.0"
+    ktlint "com.pinterest:ktlint:0.40.0"
 
     debugImplementation "com.facebook.stetho:stetho:${stethoVersion}"
     debugImplementation "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
@@ -166,7 +166,7 @@ dependencies {
 
     implementation "androidx.multidex:multidex:2.0.1"
 
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:3.3.3'
 
     androidTestImplementation "androidx.test.ext:junit:1.1.1"
@@ -180,7 +180,8 @@ dependencies {
     implementation "com.github.TeamNewPipe:nanojson:1d9e1aea9049fc9f85e68b43ba39fe7be1c1f751"
     implementation "org.jsoup:jsoup:1.13.1"
 
-    implementation "com.squareup.okhttp3:okhttp:3.12.11"
+    //noinspection GradleDependency --> do not update okhttp above 3.12.xx to keep supporting Android 4.4 users
+    implementation "com.squareup.okhttp3:okhttp:3.12.13"
 
     implementation "com.google.android.exoplayer:exoplayer:${exoPlayerVersion}"
     implementation "com.google.android.exoplayer:extension-mediasession:${exoPlayerVersion}"
@@ -218,7 +219,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
     implementation "com.jakewharton.rxbinding2:rxbinding:2.2.0"
 
-    implementation "org.ocpsoft.prettytime:prettytime:4.0.5.Final"
+    implementation "org.ocpsoft.prettytime:prettytime:5.0.6.Final"
 }
 
 static String getGitWorkingBranch() {
