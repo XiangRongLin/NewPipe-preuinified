@@ -13,8 +13,8 @@ android {
         resValue "string", "app_name", "NewPipe"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 993
-        versionName "0.22.3.2"
+        versionCode 994
+        versionName "0.22.3.3"
 
         multiDexEnabled true
 
@@ -175,7 +175,9 @@ dependencies {
         exclude module: 'support-annotations'
     }
 
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:eb07d70a2ce03bee3cc74fc33b2e4173e1c21436'
+    // v0.22.5+ requires Java 11
+    //implementation 'com.github.TeamNewPipe:NewPipeExtractor:eb07d70a2ce03bee3cc74fc33b2e4173e1c21436'
+    implementation 'com.github.Jtfk:NewPipeExtractor-j8:0.22.7-j8'
 
     implementation "com.github.TeamNewPipe:nanojson:1d9e1aea9049fc9f85e68b43ba39fe7be1c1f751"
     implementation "org.jsoup:jsoup:1.13.1"
